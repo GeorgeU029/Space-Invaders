@@ -1,12 +1,12 @@
 import pygame
-from pygame.sprite import Spirte 
+from pygame.sprite import Sprite 
 
-class Bullet(Spirte):
+class Bullet(Sprite):
     """A class thate managet the bullets that will be fired from the ship"""
 
     def __init__(self,ai_settings,screen,ship):
         """ create the bullet and set its position equal to the ships pos"""
-        super().__init__()
+        super(Bullet,self).__init__()
         self.screen = screen
 
         #Create a bullet rect/hitbox at 0,0 and then move it to the correct pos that it should be at!
@@ -27,4 +27,4 @@ class Bullet(Spirte):
         self.rect.y = self.y 
     def draw_bullet(self):
         """Draw the bullet to the screen"""
-        pygame.draw.rect(self.screen,self.color,self,rect)     
+        pygame.draw.rect(self.screen,self.color,self.rect)     
