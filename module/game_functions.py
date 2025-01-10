@@ -17,7 +17,7 @@ def update_screen(ai_settings,screen,ship):
     ship.blitme()
     #update the frames of the gane
     pygame.display.flip()
-def check_keydown_events(event,ship):
+def check_keydown_events(event,ai_settings,ship,bullets):
     """"will respond and move the ship depending on key press"""
     if event.key == pygame.K_RIGHT:
         ship.moving_right = True
