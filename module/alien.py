@@ -14,8 +14,8 @@ class Alien(Sprite):
         self.rect = self.image.get_rect()
 
         #Spawn the alien at the top left of the screen 
-        self.rect.x = self.rect.width-100
-        self.rect.y = self.rect.height-100
+        self.rect.x = self.rect.width
+        self.rect.y = self.rect.height
 
         #Keep track of the aliens exact pos in the screen
         self.x = float(self.rect.x)
