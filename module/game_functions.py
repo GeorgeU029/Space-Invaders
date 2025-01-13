@@ -1,8 +1,9 @@
 import sys
 import pygame
+from random import randint
 from module.bullet import Bullet
 from module.alien import Alien 
-
+from module.star import Star
 def check_events(ai_settings,screen,ship,bullets):
     """This will respond to keyboard and mouse presses"""
     for event in pygame.event.get():
@@ -14,9 +15,11 @@ def check_events(ai_settings,screen,ship,bullets):
             check_keyup_events(event,ship)
              
                
-def update_screen(ai_settings,screen,ship,aliens,bullets): 
+def update_screen(ai_settings,screen,ship,aliens,bullets,stars): 
     """This will update the images on the screen """
     screen.fill(ai_settings.bg_color)
+    for star in stars.sprites():
+        star.blitme()    
     for bullet in bullets.sprites():
         bullet.draw_bullet()
     ship.blitme()
@@ -65,7 +68,7 @@ def get_number_alien_x(ai_settings,alien_width):
 def get_number_of_rows(ai_settings,ship_height,alien_height):
     """Determine the num of rows of aliens that can fit on the screen"""
     available_space_y = (ai_settings.screen_height - (3 * alien_height) - ship_height)
-    number_rows = int(available_space_y / (2 * alien_height))
+    number_rows = int((available_space_y / (2 * alien_height))/2) 
     return number_rows
 
 def create_alien(ai_settings,screen,aliens,alien_number,row_number):
@@ -73,7 +76,7 @@ def create_alien(ai_settings,screen,aliens,alien_number,row_number):
     alien_width = alien.rect.width
     alien.x = alien_width + 2 * alien_width * alien_number
     alien.rect.x = alien.x
-    alien.rect.y = alien.rect.height + 2 * alien.rect.height * row_number
+    alien.rect.y = (alien.rect.height + 2 * alien.rect.height * row_number) * 1.4
     aliens.add(alien)
 
 def create_fleet(ai_settings,screen,ship,aliens):
@@ -86,4 +89,20 @@ def create_fleet(ai_settings,screen,ship,aliens):
     for row_number in range(number_rows): 
         for alien_number in range(number_aliens_x):
             create_alien(ai_settings,screen,aliens,alien_number,row_number)
-        
+
+def create_star(screen,stars,x,y):
+    star = Star(screen)
+    star.x = 1
+    star.rect.x = x
+    star.rect.y = y
+    stars.add(star)
+
+def create_stars(ai_settings,screen,stars):
+  
+    number_starts = 500
+
+    for _ in range(number_starts):
+        random_x = randint(0,ai_settings.screen_width-1)
+        random_y = randint(0,ai_settings.screen_width-1)
+
+        create_star(screen,stars,random_x,random_y)
