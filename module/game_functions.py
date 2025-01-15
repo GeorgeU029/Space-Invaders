@@ -34,14 +34,15 @@ def check_play_button(ai_settings, screen, stats, play_button, ship, bullets, al
         ship.center_ship()
 
 
-def update_screen(ai_settings, screen, stats, ship, aliens, bullets, stars, play_button):
+def update_screen(ai_settings, screen, stats,sb, ship, aliens, bullets, stars, play_button):
     """Update images on the screen and flip to the new screen."""
     screen.fill(ai_settings.bg_color)
     for star in stars.sprites():
         star.blitme()
     for bullet in bullets.sprites():
         bullet.draw_bullet()
-    
+    #draw the score info
+    sb.show_score()
     ship.blitme()
     aliens.draw(screen)
 
@@ -82,7 +83,7 @@ def update_bullets(ai_settings, screen, ship, aliens, bullets):
         if bullet.rect.bottom <= 0:
             bullets.remove(bullet)
 
-    check_bullet_alien_collision(ai_settings, screen, ship, aliens, bullets)
+    check_bullet_alien_collision(ai_settings, screen,stats,sb, ship, aliens, bullets)
 
 def check_bullet_alien_collision(ai_settings, screen, ship, aliens, bullets):
     """Respond to bullet-alien collisions."""
