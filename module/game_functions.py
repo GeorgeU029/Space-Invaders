@@ -75,7 +75,7 @@ def fire_bullets(ai_settings, screen, ship, bullets):
         new_bullet = Bullet(ai_settings, screen, ship)
         bullets.add(new_bullet)
 
-def update_bullets(ai_settings, screen, ship, aliens, bullets):
+def update_bullets(ai_settings, screen,stats,sb, ship, aliens, bullets):
     """Update the position of bullets and remove old bullets."""
     bullets.update()
 
@@ -85,10 +85,12 @@ def update_bullets(ai_settings, screen, ship, aliens, bullets):
 
     check_bullet_alien_collision(ai_settings, screen,stats,sb, ship, aliens, bullets)
 
-def check_bullet_alien_collision(ai_settings, screen, ship, aliens, bullets):
+def check_bullet_alien_collision(ai_settings, screen,stats,sb, ship, aliens, bullets):
     """Respond to bullet-alien collisions."""
     collisions = pygame.sprite.groupcollide(bullets, aliens, True, True)
-
+    if collisions:
+        stats.score += ai_settings.alien_points
+        sb.prep_score()
     if len(aliens) == 0:
         bullets.empty()
         ai_settings.increase_speed()
