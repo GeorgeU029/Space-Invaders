@@ -21,7 +21,8 @@ def check_events(ai_settings, screen, stats, play_button, ship, bullets, aliens)
 
 def check_play_button(ai_settings, screen, stats, play_button, ship, bullets, aliens, mouse_x, mouse_y):
     """Start a new game when the player clicks Play."""
-    if play_button.rect.collidepoint(mouse_x, mouse_y) and not stats.game_active:
+    button_clicked = play_button.rect.collidepoint(mouse_x,mouse_y)
+    if button_clicked and not stats.game_active:
         stats.reset_stats()
         stats.game_active = True
 
@@ -30,6 +31,7 @@ def check_play_button(ai_settings, screen, stats, play_button, ship, bullets, al
 
         create_fleet(ai_settings, screen, ship, aliens)
         ship.center_ship()
+
 
 def update_screen(ai_settings, screen, stats, ship, aliens, bullets, stars, play_button):
     """Update images on the screen and flip to the new screen."""
@@ -171,6 +173,7 @@ def ship_hit(ai_settings, stats, screen, ship, aliens, bullets):
         sleep(0.5)
     else:
         stats.game_active = False
+        pygame.mouse.set_visible(True)
 
 def check_aliens_bottom(ai_settings, stats, screen, ship, aliens, bullets):
     """Check if any aliens have reached the bottom of the screen."""
