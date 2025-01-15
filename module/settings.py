@@ -8,10 +8,10 @@ class Settings():
 
         #ship settings 
         self.ship_speed_factor = 1.5
-
+        self.ship_limit = 3
         #bullet settings
-        self.bullet_speed_factor = 1
-        self.bullet_width = 100
+        self.bullet_speed_factor = 4
+        self.bullet_width = 500
         self.bullet_height = 15
         self.bullet_color = 57,255,20
         self.bullets_allowed = 3
