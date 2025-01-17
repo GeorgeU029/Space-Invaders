@@ -13,7 +13,7 @@ class Scoreboard():
         self.stats = stats
 
         #Font settings for scoring information
-        self.text_color = (30,30,30)
+        self.text_color = (255, 69, 0)
         self.font = pygame.font.SysFont(None,48)
 
         #Prepare the initial score image.
@@ -31,8 +31,8 @@ class Scoreboard():
 
         #Display the score at the top right of the screen
         self.score_rect = self.score_image.get_rect()
-        self.score_rect.right = self.screen_rect.right - 200
-        self.score_rect.top = 200
+        self.score_rect.right = self.screen_rect.right -30
+        self.score_rect.top = 30
     
     def show_score(self):
         """Draw score to the screen"""
@@ -51,7 +51,7 @@ class Scoreboard():
         #Place the highscore value at the center of the screen 
         self.high_score_rect = self.high_score_image.get_rect()
         self.high_score_rect.centerx =self.screen_rect.centerx
-        self.high_score_rect.top = self.score_rect.top
+        self.high_score_rect.top = self.score_rect.top - 20
 
     def prep_level(self):
         """Turn the level into a rednererd image."""
